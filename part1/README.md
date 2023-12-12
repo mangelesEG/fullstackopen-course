@@ -1,3 +1,3 @@
 
 > [!IMPORTANT]
- > Exercises 1.1.-1.2 as folder unicafe
+ > Exercises 1.1-1.5 as folder courseinfo
