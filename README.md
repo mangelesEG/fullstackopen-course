@@ -1,4 +1,4 @@
-![image](https://github.com/mangelesEG/fullstackopen-course/assets/42140105/a1550039-704d-4486-9d3d-dac20279b988)# fullstackopen-course
+# fullstackopen-course
 Curso de fullstackopen
 
 ```mermaid
