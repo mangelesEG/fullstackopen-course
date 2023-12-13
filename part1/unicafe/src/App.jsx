@@ -75,16 +75,24 @@ if(total==0) return (
   </>)
 else
 return(<><h1>Statistics</h1>
-      <Display text='good' counter={good} />
-      <Display text='neutral' counter={neutral} />
-      <Display text='bad' counter={bad} />
-      <hr></hr>
 
-      <Display text='all' counter={total} />
-      <Display text='average' counter={media} />
-      <Display text='positive' counter={positive} unity='%' />
+<StatisticLine text="good" value={good} />
+<StatisticLine text="neutral" value={neutral} />
+<StatisticLine text="bad" value={bad} />
+      <hr></hr>
+<StatisticLine text="all" value={total} />
+<StatisticLine text="average" value={media} />
+<StatisticLine text="positive" value={positive+'%'} />
 
 </>)
+}
+
+const StatisticLine = ({text,value})=> {
+  return (
+    <>
+    <Display text={text} counter={value} />
+    </>
+  )
 }
 
 export default App
