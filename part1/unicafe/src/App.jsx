@@ -62,7 +62,19 @@ const App = () => {
       <Button handleClick={setNeutralFeedback} text='neutral'></Button>
       <Button handleClick={setBadFeedback} text='bad'></Button>
 
-      <h1>Statistics</h1>
+     
+      <Statitics good={good} bad={bad} neutral ={neutral} total={total} media={media} positive={positive}/>
+    </div>
+  )
+}
+const Statitics = ({good,bad,neutral,total,media,positive})=>{
+
+if(total==0) return (
+  <><h1>Statistics</h1>
+  No feedback given
+  </>)
+else
+return(<><h1>Statistics</h1>
       <Display text='good' counter={good} />
       <Display text='neutral' counter={neutral} />
       <Display text='bad' counter={bad} />
@@ -71,8 +83,8 @@ const App = () => {
       <Display text='all' counter={total} />
       <Display text='average' counter={media} />
       <Display text='positive' counter={positive} unity='%' />
-    </div>
-  )
+
+</>)
 }
 
 export default App
