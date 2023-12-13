@@ -5,7 +5,7 @@ const Button = ({ handleClick, text }) => <button onClick={handleClick}>
   {text}
 </button>
 
-const Display = ({ counter, text,unity }) => <div>{text}: {counter} {unity}</div>
+const Display = ({ counter, text,unity }) => <tr><td>{text}</td><td>{counter}</td></tr>
 
 const App = () => {
   // guarda los clics de cada botón en su propio estado
@@ -74,16 +74,16 @@ if(total==0) return (
   No feedback given
   </>)
 else
-return(<><h1>Statistics</h1>
-
+return(<><table><thead><th><h2>Statistics</h2></th></thead>
+<tbody>
 <StatisticLine text="good" value={good} />
 <StatisticLine text="neutral" value={neutral} />
 <StatisticLine text="bad" value={bad} />
-      <hr></hr>
+     
 <StatisticLine text="all" value={total} />
 <StatisticLine text="average" value={media} />
 <StatisticLine text="positive" value={positive+'%'} />
-
+</tbody></table>
 </>)
 }
 
