@@ -23,6 +23,11 @@ const App = () => {
         exercises: 14,
         id: 3,
       },
+      {
+        name: 'Anular for developer',
+        exercises: 20,
+        id: 4,
+      },
     ],
   }
 

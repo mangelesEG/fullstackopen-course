@@ -20,6 +20,7 @@ return <>
        <Part key={part.id} content={part}></Part>
        ))}
     </ul>
+    <strong>Total of exercise {data.map(x=>x.exercises).reduce((acc,num)=>acc+num)}</strong>
 </>
 }
 const Part=({content})=>{
