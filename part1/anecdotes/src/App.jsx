@@ -12,9 +12,22 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-
-  const [points,setPoints]=useState((new Array(6).fill(0)))
+const initial = new Array(6).fill(0)
+  const [points,setPoints]=useState(initial)
   const [selected, setSelected] = useState(0)
+  const [maxVotes, setMaxVotes] = useState(0)
+  const [mostPopulate, setMostPopulate] = useState('')
+  
+function calculateMostPopulate(pointsValue) {
+  const index = pointsValue.indexOf( Math.max(...pointsValue))
+  setMaxVotes(Math.max(...pointsValue))
+  console.log('Votos max', Math.max(...pointsValue))
+  const mostPopulateAnecdote = anecdotes[index]
+  console.log('Anecdota',mostPopulateAnecdote, 'en indice',index)
+  
+  setMostPopulate(mostPopulateAnecdote)
+}
+
   const showAnecdoteClick = () => {
     const min = 0;
     const max = 5;
@@ -23,18 +36,30 @@ const App = () => {
     setSelected(random);
   }
   const addVoteClick = () =>{
-    const copy ={...points}
+    const copy =[...points]
     copy[selected]+=1
     setPoints(copy)
+    calculateMostPopulate(copy)
   }
-  return (
+  if(mostPopulate!="") return (
     <div>
-     <p> <strong>{anecdotes[selected]}</strong><br></br> has {points[selected]} votes </p>
+      <h1> Anecdote of the day</h1>
+     <p>{anecdotes[selected]}<br></br> has {points[selected]} votes </p>
       <br></br>
       <button onClick={showAnecdoteClick}>Next anecdote</button>
       <button onClick={addVoteClick}>Vote</button>
+      <h1> Anecdote with most votes</h1>
+      <p>{mostPopulate}<br></br> has {maxVotes} votes </p>
     </div>
   )
+  else return(<div>
+    <h1> Anecdote of the day</h1>
+   <p>{anecdotes[selected]}<br></br> has {points[selected]} votes </p>
+    <br></br>
+    <button onClick={showAnecdoteClick}>Next anecdote</button>
+    <button onClick={addVoteClick}>Vote</button>
+    <h1> Anecdote with most votes</h1>
+  </div>)
 }
 
 export default App
