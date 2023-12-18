@@ -4,10 +4,6 @@ const CountryForm = ({ data }) => {
   console.log('CountryForm componente', data)
   console.log('CountryForm componente', data)
   const objectArray = Object.entries(data.languages)
-  const elements = []
-  objectArray.map(([key, value]) => {
-    elements.push(<li key={key}> {value} </li>)
-  })
   return (
     <>
       <h1>{data.name.common}</h1>
@@ -19,7 +15,7 @@ const CountryForm = ({ data }) => {
           <li key={key}> {value} </li>)
         }
       </ul>
-      <img src={data.flags.svg} alt={data.flags.alt} ></img>
+      <img  src={data.flags.svg} alt={data.flags.alt} ></img>
     </>
   )
 }

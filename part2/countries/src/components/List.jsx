@@ -1,9 +1,15 @@
 import React from "react"
 import CountryForm from "./CountryForm"
-const ListCountries = ({data})=>{
+const ListCountries = ({data, setSearchText})=>{
   console.log('ListCountries componente',data)
   console.log('ListCountries componente',data.length)
-  if(data.length==1){
+  
+  const clickHandler  = (value)=>{
+    console.log('CLICK',value)
+    setSearchText(value)
+  }
+  
+  if(data.length===1){
     return(
       <>
       <CountryForm data={data[0]} />
@@ -18,12 +24,11 @@ const ListCountries = ({data})=>{
     )
   }
   else
-    return(
-       <> 
-        {data.map(item =>
-          <p key={item.name.common}>{item.name.common}</p>
-        )}
-        </>
-)}
+    return data.map(item =>{return (
+       <div key={item.name.common}>
+       {item.name.common}  <button onClick={(e)=>clickHandler(item.name.common)}> SHOW </button>
+
+        </div>)
+})}
 
 export default ListCountries
