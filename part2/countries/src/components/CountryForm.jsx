@@ -1,5 +1,6 @@
 import React from "react"
 import './countryform.css'
+import WeatherData from "./WeatherData"
 const CountryForm = ({ data }) => {
   console.log('CountryForm componente', data)
   console.log('CountryForm componente', data)
@@ -16,6 +17,7 @@ const CountryForm = ({ data }) => {
         }
       </ul>
       <img  src={data.flags.svg} alt={data.flags.alt} ></img>
+      <WeatherData country={data.name.common}></WeatherData>
     </>
   )
 }
