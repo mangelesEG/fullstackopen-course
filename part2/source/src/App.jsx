@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Note from './components/Note'
+import noteService from './services/Notes'
 import axios from 'axios'
 
 
@@ -10,11 +11,10 @@ const App = () => {
   
   useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
+   noteService.getAll()
       .then(response => {
         console.log('promise fulfilled')
-        setNotes(response.data)
+        setNotes(response)
       })
   }, [])
   console.log('render', notes.length, 'notes')
@@ -30,11 +30,31 @@ const App = () => {
       content: newNote,
       date: new Date().toISOString(),
       important: Math.random() < 0.5,
-      id: notes.length + 1,
     }
 
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
+    
+    noteService.create(noteObject)
+    .then(response => {
+        setNotes(notes.concat(response))
+        setNewNote('')
+    })
+  }
+  const toggleImportanceOf = (id) => {
+    const url = `http://localhost:3001/notes/${id}`
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+    console.log(`importance of ${id} needs to be toggled`)
+  
+
+    noteService.update(id,changedNote).then(response => {
+      setNotes(notes.map(note => note.id !== id ? note : response))
+    })
+    .catch(error => {
+      alert(
+        `the note '${note.content}' was already deleted from server`
+      )
+      setNotes(notes.filter(n => n.id !== id))
+    })
   }
   const handleNoteChange = (event) => {
     console.log(event.target.value)
@@ -50,7 +70,7 @@ const App = () => {
       </div>
       <ul>
         {notesToShow.map(note =>
-          <Note key={note.id} note={note} />
+          <Note key={note.id} note={note} toggleImportance={()=>toggleImportanceOf(note.id)} />
         )}
       </ul>
       <form onSubmit={addNote}>
